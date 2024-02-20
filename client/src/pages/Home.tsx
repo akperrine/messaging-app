@@ -1,7 +1,11 @@
+import ChatGroups from "../components/ChatGroups";
+import MessageRoom from "../components/MessageRoom";
+
 const HomePage: React.FC = () => {
   return (
     <div>
-      <h1>Welcome to the Home Page!</h1>
+      <ChatGroups />
+      <MessageRoom />
     </div>
   );
 };
