@@ -30,12 +30,13 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public User createUser(User user) {
+    public UserDTO createUser(User user) throws Exception {
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser.isPresent()) {
-            return null;
+            throw new Exception("User already exists");
         } else {
-            return userRepository.save(user);
+            User newUser = userRepository.save(user);
+            return UserMapper.mapUserToDTO(newUser);
         }
     }
 
@@ -50,7 +51,6 @@ public class UserService {
 
     public UserDTO login(User user) throws Exception {
         System.out.println(user.toString());
-//        ObjectId userId = new ObjectId(user.getId());
 
         Optional<User> foundUser = userRepository.findByUsername(user.getUsername());
         System.out.println(foundUser.get().getPassword() + " " + user.getPassword());

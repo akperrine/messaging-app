@@ -26,8 +26,10 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserDTO createUser(@RequestBody User user) throws Exception {
+        UserDTO newUser = userService.createUser(user);
+        System.out.println(newUser);
+        return newUser;
     }
 
     @PostMapping("/login")
