@@ -3,9 +3,12 @@ import LoginForm from "../components/LoginForm";
 import SignupForm from "../components/SignupForm";
 
 const AuthComponent = ({ onLogin }) => {
-  const handleLogin = (credentials: { username: string; password: string }) => {
+  const handleLogin = async (credentials: {
+    username: string;
+    password: string;
+  }) => {
     try {
-      login(credentials);
+      await login(credentials);
       onLogin();
     } catch (error) {
       console.log(error);
@@ -13,12 +16,12 @@ const AuthComponent = ({ onLogin }) => {
     console.log("Logging in with:", credentials);
   };
 
-  const handleSignup = (credentials: {
+  const handleSignup = async (credentials: {
     username: string;
     password: string;
   }) => {
     try {
-      createUser(credentials);
+      await createUser(credentials);
       onLogin();
     } catch (error) {
       console.log(error);

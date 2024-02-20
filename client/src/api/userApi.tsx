@@ -8,14 +8,16 @@ export async function createUser(user: { username: string; password: string }) {
     },
     body: JSON.stringify(user),
   });
-
+  //   console.log("hit", resp.json());
   if (!resp.ok) {
+    console.log("no ok");
     throw new Error("Failed to create user");
   }
-
+  console.log("hi");
   const newUser: UserCredentials | null = await resp.json();
-
+  console.log(newUser);
   if (!newUser) {
+    console.log(newUser);
     throw new Error("Username already taken");
   }
 }
