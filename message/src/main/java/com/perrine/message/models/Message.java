@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -17,8 +18,8 @@ public class Message {
 
     @Id
     private String id;
-    private User sender;
-    private List<User> recipient;
+    @DBRef
+    private Chat chatId;
     private String content;
     private LocalDateTime timestamp;
 
@@ -26,7 +27,7 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "id=" + id +
-                ", sender=" + sender +
+                ", sender=" + chatId +
                 ", content='" + content + '\'' +
                 ", timestamp=" + timestamp +
                 '}';
