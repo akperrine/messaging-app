@@ -1,0 +1,11 @@
+.chat-groups-container {
+  width: 250px;
+  background-color: red;
+  /* border: 2px solid #f4f4f4; */
+  /* border-radius: 5px; */
+}
+
+.message-room-container {
+  background-color: blue;
+  flex: 1;
+}

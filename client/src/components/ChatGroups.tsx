@@ -1,5 +1,6 @@
+import "./styles.css";
 const ChatGroups = () => {
-  return <div>ChatGroups</div>;
+  return <div className="chat-groups-container">ChatGroups</div>;
 };
 
 export default ChatGroups;

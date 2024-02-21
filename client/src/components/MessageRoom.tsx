@@ -1,5 +1,7 @@
+import "./styles.css";
+
 const MessageRoom = () => {
-  return <div>MessageRoom</div>;
+  return <div className="message-room-container">MessageRoom</div>;
 };
 
 export default MessageRoom;

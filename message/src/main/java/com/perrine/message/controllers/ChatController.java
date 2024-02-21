@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/chats")
 public class ChatController {
-
     @Autowired
     private ChatService chatService;
 
@@ -24,9 +23,9 @@ public class ChatController {
         return chatService.getChatById(id).orElse(null);
     }
 
-    @PostMapping
-    public Chat createChat(@RequestBody Chat chat) {
-        return chatService.createChat(chat);
+    @PostMapping("/create/{userId}")
+    public Chat createChat(@PathVariable String userId) throws Exception {
+        return chatService.createChat(userId);
     }
 
     @PutMapping("/{id}")

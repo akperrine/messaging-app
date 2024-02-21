@@ -1,0 +1,17 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.home-sub-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
