@@ -1,5 +1,6 @@
 package com.perrine.message.controllers;
 
+import com.perrine.message.dto.ChatUsersDTO;
 import com.perrine.message.models.Chat;
 import com.perrine.message.services.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,14 @@ public class ChatController {
     }
 
     @PostMapping("/create/{userId}")
-    public Chat createChat(@PathVariable String userId) throws Exception {
-        return chatService.createChat(userId);
+    public Chat createChat(@PathVariable String userId, @RequestBody Chat chatData) throws Exception {
+        return chatService.createChat(userId, chatData);
     }
 
-    @PutMapping("/{id}")
-    public Chat updateChat(@PathVariable String id, @RequestBody Chat updatedChat) {
-        return chatService.updateChat(id, updatedChat);
+    @PutMapping("addUsers/{chatId}")
+    public Chat addChatUser(@PathVariable String chatId, @RequestBody ChatUsersDTO userIds) throws Exception {
+        System.out.println(chatId + userIds.getUserIdsToAdd().get(0));
+        return chatService.addChatUser(chatId, userIds);
     }
 
     @DeleteMapping("/{id}")

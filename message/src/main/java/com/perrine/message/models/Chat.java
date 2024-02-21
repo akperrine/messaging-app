@@ -9,10 +9,11 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Document(collation = "chats")
+@Document
 public class Chat {
 
     @Id
     String id;
+    String chatName;
     List<User> users;
 }

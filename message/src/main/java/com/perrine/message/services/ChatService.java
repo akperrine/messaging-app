@@ -1,5 +1,6 @@
 package com.perrine.message.services;
 
+import com.perrine.message.dto.ChatUsersDTO;
 import com.perrine.message.models.Chat;
 import com.perrine.message.models.User;
 import com.perrine.message.repositories.ChatRepository;
@@ -27,7 +28,7 @@ public class ChatService {
         return chatRepository.findById(id);
     }
 
-    public Chat createChat(String userId) throws Exception {
+    public Chat createChat(String userId, Chat chatData) throws Exception {
         Optional<User> userCreatingChat = userService.getUserById(userId);
         if (userCreatingChat.isEmpty()) {
             throw new Exception("User does not exist");
@@ -36,12 +37,33 @@ public class ChatService {
         List<User> users = new ArrayList<>();
         users.add(userCreatingChat.get());
         newChat.setUsers(users);
+        newChat.setChatName(chatData.getChatName());
         return chatRepository.save(newChat);
     }
 
-    public Chat updateChat(String id, Chat updatedChat) {
-        updatedChat.setId(id);
-        return chatRepository.save(updatedChat);
+    public Chat addChatUser(String chatId, ChatUsersDTO listOfUsersDto) throws Exception {
+        System.out.println("before find chat");
+        Optional<Chat> currentChatOptional = chatRepository.findById(chatId);
+        if (currentChatOptional.isEmpty()) {
+            throw new Exception("Error retrieving Chat");
+        }
+        Chat currentChat = currentChatOptional.get();
+        List<User> currentUsers = currentChat.getUsers();
+        System.out.println(currentUsers);
+
+        for (String userId : listOfUsersDto.getUserIdsToAdd()) {
+
+        Optional<User> userToAddOptional = userService.getUserById(userId);
+        if (userToAddOptional.isEmpty()) {
+            throw new Exception("User does not exist");
+        }
+        User userToAdd = userToAddOptional.get();
+        currentUsers.add(userToAdd);
+
+        }
+
+        currentChat.setUsers(currentUsers);
+        return chatRepository.save(currentChat);
     }
 
     public void deleteChat(String id) {
