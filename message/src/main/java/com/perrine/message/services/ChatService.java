@@ -42,7 +42,6 @@ public class ChatService {
     }
 
     public Chat addChatUser(String chatId, ChatUsersDTO listOfUsersDto) throws Exception {
-        System.out.println("before find chat");
         Optional<Chat> currentChatOptional = chatRepository.findById(chatId);
         if (currentChatOptional.isEmpty()) {
             throw new Exception("Error retrieving Chat");
@@ -58,6 +57,9 @@ public class ChatService {
             throw new Exception("User does not exist");
         }
         User userToAdd = userToAddOptional.get();
+        if (currentUsers.contains(userToAdd)) {
+            throw new Exception("User is already in this chat");
+        }
         currentUsers.add(userToAdd);
 
         }
