@@ -1,7 +1,17 @@
-const HomePage: React.FC = () => {
+import ChatGroups from "../components/ChatGroups";
+import MessageRoom from "../components/MessageRoom";
+import "./Home.css";
+
+const HomePage: React.FC = ({ onLogout }) => {
   return (
-    <div>
-      <h1>Welcome to the Home Page!</h1>
+    <div className="home-container">
+      <nav>
+        <button onClick={onLogout}>Logout</button>
+      </nav>
+      <div className="home-sub-container">
+        <ChatGroups />
+        <MessageRoom />
+      </div>
     </div>
   );
 };
