@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @Document
 public class Chat {
-
     @Id
     String id;
     String chatName;
