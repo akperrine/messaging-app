@@ -3,9 +3,11 @@ package com.perrine.message.controllers;
 import com.perrine.message.models.Message;
 import com.perrine.message.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/messages")
@@ -19,9 +21,11 @@ public class MessageController {
         return messageService.getAllMessages();
     }
 
-    @GetMapping("/{id}")
-    public Message getMessageById(@PathVariable String id) {
-        return messageService.getMessageById(id).orElse(null);
+    @GetMapping("/{chatId}")
+    public ResponseEntity<Map<String, Object>> getMessageByChatId(@PathVariable String chatId, @RequestParam int page) {
+        Map<String, Object> result = messageService.getMessagesByChatId(chatId, page);
+
+        return ResponseEntity.ok().body(result);
     }
 
     @PostMapping
